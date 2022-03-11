@@ -1,0 +1,1 @@
+![](../Tarea2_Parcial2/figuras.png)

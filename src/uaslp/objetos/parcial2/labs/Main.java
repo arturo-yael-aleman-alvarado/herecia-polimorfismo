@@ -1,5 +1,6 @@
 package uaslp.objetos.parcial2.labs;
 
+import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ abstract class Figure{
 
    protected Figure(String name){
        this.name = name;
+       figuresCreated ++;
    }
 
    public abstract float getArea();
@@ -162,19 +164,31 @@ public  class Main {
         figureList.add(new Rectangle(4, 5));
         figureList.add(new Rectangle(4.5f, 9.6f));
 
-        Circle circle1 = new Circle();
-        circle1.setRadio(5.3f); //5.3 es double, 5.3f es flotante
-
-        Circle circle2 = new Circle(10.6f);
-
-        figureList.add(circle1);
-        figureList.add(circle2);
+        figureList.add(new Circle(5.3f));
+        figureList.add(new Circle(10.6f));
 
         //POLIMORFISMO
         for(Figure figure: figureList){
             System.out.println(figure.getName() + ", Area: " + figure.getArea() + ", Perimetro: " + figure.getPerimeter());
         }
+
+        if(Modifier.isAbstract(Figure.class.getModifiers())){
+            System.out.println("Figure es abstracta");
+        }
+
+        System.out.println("Se generaron: " + Figure.getFiguresCreated() + " figuras");
     }
+    /*Salida del programa:
+    Polígono, Area: 63.0, Perímetro: 31.5
+    Polígono, Area: 70.200005, Perímetro: 31.2
+    Rectángulo, Area: 20.0, Perímetro: 18.0
+    Rectángulo, Area: 43.2, Perímetro: 28.2
+    Círculo, Area: 88.247345, Perímetro: 33.300884
+    Círculo, Area: 352.98938, Perímetro: 66.60177
+    Figure es abstracta
+    Se generaron: 6 figuras
+    */
+
 
     private static void polygonTest() {
         List<Polygon> polygonList = new LinkedList<>();
